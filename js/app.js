@@ -42,6 +42,40 @@ function setStudentListeners() {
           console.log(student.name)
           miniQuery.SweetSelector.select('h2')[0].innerHTML = student.name
 
+          //add form here with student id
+          // createForm(); can't grab student id????
+
+            var title = document.createElement("h3");
+            title.innerHTML = "Add a Badge";
+
+            var form = document.createElement('FORM');
+            form.id = 'badge-form';
+            form.method = 'POST';
+            var studentId = student.id;
+            form.action = 'http:/localhost:3000/students/' + studentId + '/badges';
+
+            tb = document.createElement('INPUT');
+            tb.type='TEXT';
+            tb.name='badge[title]';
+            form.appendChild(tb);
+
+            tb = document.createElement('INPUT');
+            tb.type = 'HIDDEN';
+            tb.name = 'badge[student_id]';
+            tb.value = studentId;
+            form.appendChild(tb);
+
+            tb = document.createElement('INPUT');
+            tb.type = 'SUBMIT';
+            tb.value = 'Submit';
+            form.appendChild(tb);
+
+            miniQuery.SweetSelector.select(".add-badge")[0].appendChild(title);
+
+            miniQuery.SweetSelector.select(".add-badge")[0].appendChild(form);
+
+
+
           setNewBadgeListeners();
 
         })
@@ -52,14 +86,18 @@ function setStudentListeners() {
 
 function setNewBadgeListeners() {
 
-  var selector = 'h3';
-  var event = 'click';
-  var data = $(this).serialize();
+  var selector = '.add-badge';
+  var event = 'submit';
+
+  //get form data given student id
+  console.log(e.target)
+
   var eventFunction = function(e){
     e.preventDefault();
+    console.log('blah')
     miniQuery.AjaxWrapper.postRequest({
       type: 'POST',
-      url: 'http://localhost:3000/students',
+      url: '/students/' + id + '/badges',
       data: data
     }).then(function(response){
       console.log(response)
@@ -71,4 +109,3 @@ function setNewBadgeListeners() {
 
 
 }
-

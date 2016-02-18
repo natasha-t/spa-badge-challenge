@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   get '/' => 'students#index'
 
-  resources :students
+  resources :students do
+    resources :badges, only: [:index, :create]
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
