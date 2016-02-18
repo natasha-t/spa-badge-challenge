@@ -1,16 +1,16 @@
 @import url("normalize.css");
 
 body {
-  background-color: #000;
+  background-color: white;
 }
 
 h1, h2, p, div {
-  color: white;
+  color: black;
 }
 
 a {
   text-decoration: none;
-  color: dodgerblue;
+  color: blue;
   font-size: 20px;
 }
 
@@ -28,7 +28,7 @@ a:hover {
   padding: 0px 10px;
   margin: 10px 0px 5px 0px;
   font-size: 50px;
-  color: firebrick;
+  color: black;
 }
 
 .container {
