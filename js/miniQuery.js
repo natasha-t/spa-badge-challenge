@@ -66,7 +66,8 @@ var miniQuery = (function(){
            if(ajaxRequest.type === 'GET'){
              newReq.send();
           } else if(ajaxRequest.type === 'POST') {
-            newReq.send(ajaxRequest.data)
+            newReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            newReq.send(ajaxRequest.data);
           }
 
            newReq.onload = function() {

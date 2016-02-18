@@ -3,7 +3,7 @@ class BadgesController < ApplicationController
   def create
     @badge = Badge.new(badge_params)
     if @badge.save
-      render json: @badge, status: :created, location: @badge
+      render json: @badge, status: :created
     else
       err
     end

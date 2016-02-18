@@ -56,14 +56,15 @@ function setStudentListeners() {
 
             tb = document.createElement('INPUT');
             tb.type='TEXT';
-            tb.name='badge[title]';
+            tb.name='title';
             form.appendChild(tb);
 
             tb = document.createElement('INPUT');
-            tb.type = 'HIDDEN';
-            tb.name = 'badge[student_id]';
-            tb.value = studentId;
+            tb.type='HIDDEN';
+            tb.name='student_id';
+            tb.value = student.id
             form.appendChild(tb);
+
 
             tb = document.createElement('INPUT');
             tb.type = 'SUBMIT';
@@ -90,15 +91,26 @@ function setNewBadgeListeners() {
   var event = 'submit';
 
   //get form data given student id
-  console.log(e.target)
+  var form = miniQuery.SweetSelector.select('#badge-form');
+  var value;
+  var params = '';
+
+  for(var i = 0; i < form.elements.length; i++){
+    value = form.elements[i].value;
+    params += form.elements[i].name + "=" + encodeURIComponent(value) + "&";
+  }
+
+  var action = form.elements.student_id.value;
+  console.log(action)
+  console.log(params)
 
   var eventFunction = function(e){
     e.preventDefault();
     console.log('blah')
-    miniQuery.AjaxWrapper.postRequest({
+    miniQuery.AjaxWrapper.request({
       type: 'POST',
-      url: '/students/' + id + '/badges',
-      data: data
+      url: 'http://localhost:3000/students/' + action + '/badges',
+      data: params
     }).then(function(response){
       console.log(response)
       console.log("hello?")
